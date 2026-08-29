@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker Dashboard</title>
+
+
+    <!-- ================= DASHBOARD CSS ================= -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+
+    <!-- ================= FONT AWESOME ================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND GREEN TEXTURE
+===================================================== -->
+
+<div class="dashboard-texture texture-top-left">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+<div class="dashboard-texture texture-bottom-right">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+
+<!-- =====================================================
+     DASHBOARD CONTAINER
+===================================================== -->
+
+<div class="container">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <div class="sidebar">
+
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <h2>Expense Tracker</h2>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <ul>
+
+
+            <!-- Dashboard -->
+
+            <li class="active"
+                onclick="window.location.href='/dashboard'">
+
+                <i class="fas fa-home"></i>
+
+                <span>Dashboard</span>
+
+            </li>
+
+
+            <!-- Add Expense -->
+
+            <li onclick="window.location.href='/add_expense'">
+
+                <i class="fas fa-wallet"></i>
+
+                <span>Add Expense</span>
+
+            </li>
+
+
+            <!-- Expense History -->
+
+            <li onclick="window.location.href='/expense_history'">
+
+                <i class="fas fa-clock-rotate-left"></i>
+
+                <span>Expense History</span>
+
+            </li>
+
+
+            <!-- Add Income -->
+
+            <li onclick="window.location.href='/add_income'">
+
+                <i class="fas fa-money-bill-wave"></i>
+
+                <span>Add Income</span>
+
+            </li>
+
+
+            <!-- Income History -->
+
+            <li onclick="window.location.href='/income_history'">
+
+                <i class="fas fa-list"></i>
+
+                <span>Income History</span>
+
+            </li>
+
+
+            <!-- Reports -->
+
+            <li onclick="window.location.href='/reports'">
+
+                <i class="fas fa-chart-pie"></i>
+
+                <span>Reports</span>
+
+            </li>
+
+
+            <!-- Profile -->
+
+            <li onclick="window.location.href='/profile'">
+
+                <i class="fas fa-user"></i>
+
+                <span>Profile</span>
+
+            </li>
+
+
+            <!-- Settings -->
+
+            <li onclick="window.location.href='/settings'">
+
+                <i class="fas fa-cog"></i>
+
+                <span>Settings</span>
+
+            </li>
+
+
+            <!-- Logout -->
+
+            <li onclick="window.location.href='/logout'">
+
+                <i class="fas fa-sign-out-alt"></i>
+
+                <span>Logout</span>
+
+            </li>
+
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <div class="main">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <div class="topbar">
+
+
+            <h2>
+                Welcome, {{ username }} 👋
+            </h2>
+
+
+            <button
+                class="btn"
+                onclick="window.location.href='/add_expense'">
+
+                + Add Expense
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             DASHBOARD CARDS
+        ================================================== -->
+
+        <div class="cards">
+
+
+            <!-- Total Balance -->
+
+            <div class="card balance">
+
+                <i class="fas fa-wallet"></i>
+
+                <h4>Total Balance</h4>
+
+                <h2>
+                    ₹{{ "%.2f"|format(balance) }}
+                </h2>
+
+            </div>
+
+
+
+            <!-- Total Income -->
+
+            <div
+                class="card income"
+                onclick="window.location.href='/income_history'"
+                style="cursor:pointer;">
+
+                <i class="fas fa-arrow-down"></i>
+
+                <h4>Total Income</h4>
+
+                <h2>
+                    ₹{{ "%.2f"|format(income) }}
+                </h2>
+
+            </div>
+
+
+
+            <!-- Total Expense -->
+
+            <div
+                class="card expense"
+                onclick="window.location.href='/expense_history'"
+                style="cursor:pointer;">
+
+                <i class="fas fa-arrow-up"></i>
+
+                <h4>Total Expense</h4>
+
+                <h2>
+                    ₹{{ "%.2f"|format(expense) }}
+                </h2>
+
+            </div>
+
+
+
+            <!-- Total Savings -->
+
+            <div class="card savings">
+
+                <i class="fas fa-piggy-bank"></i>
+
+                <h4>Total Savings</h4>
+
+                <h2>
+                    ₹{{ "%.2f"|format(savings) }}
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOTTOM SECTION
+        ================================================== -->
+
+        <div class="bottom">
+
+
+            <!-- =================================================
+                 EXPENSE OVERVIEW CHART
+            ================================================== -->
+
+            <div class="chart-box">
+
+
+                <h3>Expense Overview</h3>
+
+
+                <!--
+                    Flask sends the REAL category data here.
+
+                    Example:
+
+                    Food       1200
+                    Travel      800
+                    Shopping   2000
+                -->
+
+                <!-- Flask expense category data -->
+
+<div id="chartData"
+     data-labels='{{ category_data | map(attribute=0) | list | tojson }}'
+     data-values='{{ category_data | map(attribute=1) | list | tojson }}'>
+</div>
+
+
+                <!-- Chart Canvas -->
+
+                <canvas id="myChart"></canvas>
+
+
+                <!-- Message if user has no expenses -->
+
+                <div
+                    id="noChartData"
+                    style="
+                        display:none;
+                        text-align:center;
+                        padding:80px 20px;
+                        color:#71806d;
+                    ">
+
+                    <i
+                        class="fas fa-chart-pie"
+                        style="
+                            font-size:40px;
+                            margin-bottom:15px;
+                        ">
+                    </i>
+
+                    <p>
+                        No expense data available yet.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RECENT TRANSACTIONS
+            ================================================== -->
+
+            <div class="transactions">
+
+
+                <h3>Recent Transactions</h3>
+
+
+                <table>
+
+
+                    <!-- Table Header -->
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Title</th>
+
+                            <th>Category</th>
+
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- REAL SQLITE TRANSACTIONS -->
+
+                    <tbody>
+
+
+                        {% if transactions %}
+
+
+                            {% for transaction in transactions %}
+
+
+                                <tr>
+
+
+                                    <!-- Title -->
+
+                                    <td>
+                                        {{ transaction[0] }}
+                                    </td>
+
+
+                                    <!-- Category -->
+
+                                    <td>
+                                        {{ transaction[1] }}
+                                    </td>
+
+
+                                    <!-- Amount -->
+
+                                    <td>
+                                        ₹{{ "%.2f"|format(transaction[2]) }}
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+
+                            <tr>
+
+                                <td
+                                    colspan="3"
+                                    style="
+                                        text-align:center;
+                                        padding:30px;
+                                        color:#71806d;
+                                    ">
+
+                                    No recent transactions
+
+                                </td>
+
+                            </tr>
+
+
+                        {% endif %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+
+<!-- Chart.js MUST load first -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Your Dashboard JavaScript -->
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+
+</body>
+
+</html>

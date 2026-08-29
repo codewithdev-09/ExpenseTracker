@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - Expense Tracker</title>
+
+
+    <!-- Settings CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/settings.css') }}">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND GREEN TEXTURE
+===================================================== -->
+
+<div class="settings-texture texture-top-left">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+<div class="settings-texture texture-bottom-right">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+
+<!-- =====================================================
+     BRAND
+===================================================== -->
+
+<div class="brand">
+
+    <div class="brand-icon">
+
+        <i class="fas fa-wallet"></i>
+
+    </div>
+
+    <span>Expense Tracker</span>
+
+</div>
+
+
+
+<!-- =====================================================
+     SETTINGS PAGE
+===================================================== -->
+
+<div class="settings-page">
+
+
+    <div class="settings-container">
+        <!-- =====================================================
+     FLASH MESSAGES
+===================================================== -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for category, message in messages %}
+
+                <div class="flash-message
+                    {% if category == 'success' %}
+                        flash-success
+                    {% else %}
+                        flash-danger
+                    {% endif %}">
+
+                    <div class="flash-icon">
+
+                        {% if category == 'success' %}
+
+                            <i class="fas fa-circle-check"></i>
+
+                        {% else %}
+
+                            <i class="fas fa-circle-exclamation"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="flash-content">
+
+                        {% if category == 'success' %}
+
+                            <strong>Success</strong>
+
+                        {% else %}
+
+                            <strong>Attention</strong>
+
+                        {% endif %}
+
+                        <span>{{ message }}</span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="flash-close"
+                        onclick="this.parentElement.remove()">
+
+                        <i class="fas fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+        <!-- =============================================
+             HEADER
+        ============================================== -->
+
+        <div class="settings-header">
+
+
+            <div class="page-title">
+
+
+                <div class="title-icon">
+
+                    <i class="fas fa-gear"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1>Settings</h1>
+
+                    <p>
+                        Manage your account security and preferences.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <a href="/dashboard"
+               class="back-dashboard">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- =============================================
+             SETTINGS GRID
+        ============================================== -->
+
+        <div class="settings-grid">
+
+
+            <!-- =========================================
+                 LEFT MENU / ACCOUNT
+            ========================================== -->
+
+            <div class="settings-menu">
+
+
+                <div class="settings-menu-header">
+
+
+                    <div class="menu-main-icon">
+
+                        <i class="fas fa-sliders"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>Account Settings</h2>
+
+                        <p>
+                            Manage your Expense Tracker account.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Security -->
+
+                <div class="setting-option active">
+
+
+                    <div class="option-icon">
+
+                        <i class="fas fa-shield-halved"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Security
+                        </strong>
+
+                        <span>
+                            Password & account protection
+                        </span>
+
+                    </div>
+
+
+                    <i class="fas fa-chevron-right arrow"></i>
+
+
+                </div>
+
+
+
+                <!-- Profile -->
+
+                <a href="/profile"
+                   class="setting-option">
+
+
+                    <div class="option-icon">
+
+                        <i class="fas fa-user"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Profile
+                        </strong>
+
+                        <span>
+                            View your account information
+                        </span>
+
+                    </div>
+
+
+                    <i class="fas fa-chevron-right arrow"></i>
+
+
+                </a>
+
+
+
+                <!-- Dashboard -->
+
+                <a href="/dashboard"
+                   class="setting-option">
+
+
+                    <div class="option-icon">
+
+                        <i class="fas fa-chart-pie"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Dashboard
+                        </strong>
+
+                        <span>
+                            Return to financial overview
+                        </span>
+
+                    </div>
+
+
+                    <i class="fas fa-chevron-right arrow"></i>
+
+
+                </a>
+
+
+
+                <!-- Logout -->
+
+                <a href="/logout"
+                   class="setting-option logout-option">
+
+
+                    <div class="option-icon">
+
+                        <i class="fas fa-right-from-bracket"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Logout
+                        </strong>
+
+                        <span>
+                            Sign out of your account
+                        </span>
+
+                    </div>
+
+
+                    <i class="fas fa-chevron-right arrow"></i>
+
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 CHANGE PASSWORD
+            ========================================== -->
+
+            <div class="security-card">
+
+
+                <div class="security-header">
+
+
+                    <div>
+
+
+                        <div class="security-title">
+
+                            <div class="security-icon">
+
+                                <i class="fas fa-lock"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2>
+                                    Change Password
+                                </h2>
+
+                                <p>
+                                    Create a strong password to protect
+                                    your financial information.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="secure-badge">
+
+                        <i class="fas fa-shield-halved"></i>
+
+                        Secure
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="divider"></div>
+
+
+
+                <!-- =====================================
+                     PASSWORD FORM
+                ====================================== -->
+
+                <form method="POST">
+
+
+                    <!-- CURRENT PASSWORD -->
+
+                    <div class="form-group">
+
+
+                        <label>
+
+                            Current Password
+
+                        </label>
+
+
+                        <div class="input-box">
+
+
+                            <i class="fas fa-lock"></i>
+
+
+                            <input
+                                type="password"
+                                name="old_password"
+                                placeholder="Enter your current password"
+                                required>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- NEW PASSWORD -->
+
+                    <div class="form-group">
+
+
+                        <label>
+
+                            New Password
+
+                        </label>
+
+
+                        <div class="input-box">
+
+
+                            <i class="fas fa-key"></i>
+
+
+                            <input
+                                type="password"
+                                name="new_password"
+                                placeholder="Enter your new password"
+                                required>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+
+                        <label>
+
+                            Confirm New Password
+
+                        </label>
+
+
+                        <div class="input-box">
+
+
+                            <i class="fas fa-circle-check"></i>
+
+
+                            <input
+                                type="password"
+                                name="confirm_password"
+                                placeholder="Confirm your new password"
+                                required>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- PASSWORD TIPS -->
+
+                    <div class="password-tips">
+
+
+                        <div class="tips-title">
+
+                            <i class="fas fa-lightbulb"></i>
+
+                            <strong>
+                                Password Tips
+                            </strong>
+
+                        </div>
+
+
+                        <div class="tips-grid">
+
+
+                            <span>
+
+                                <i class="fas fa-check"></i>
+
+                                Use at least 8 characters
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fas fa-check"></i>
+
+                                Include uppercase and lowercase
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fas fa-check"></i>
+
+                                Include numbers
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fas fa-check"></i>
+
+                                Avoid common passwords
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- UPDATE PASSWORD -->
+
+                    <button
+                        type="submit"
+                        class="update-btn">
+
+
+                        <i class="fas fa-shield-halved"></i>
+
+
+                        Update Password
+
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =============================================
+             BOTTOM INFORMATION
+        ============================================== -->
+
+        <div class="settings-footer">
+
+
+            <div>
+
+                <i class="fas fa-lock"></i>
+
+                Your password is securely protected.
+
+            </div>
+
+
+            <div>
+
+                <i class="fas fa-circle-info"></i>
+
+                Never share your password with anyone.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <p class="footer-text">
+
+        Simple • Secure • Smart expense management
+
+    </p>
+
+
+</div>
+
+
+</body>
+
+</html>

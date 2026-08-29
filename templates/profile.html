@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - Expense Tracker</title>
+
+    <!-- Profile CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND TEXTURE
+===================================================== -->
+
+<div class="profile-texture texture-top-left">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="profile-texture texture-bottom-right">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+<!-- =====================================================
+     BRAND
+===================================================== -->
+
+<div class="brand">
+
+    <div class="brand-icon">
+        <i class="fas fa-wallet"></i>
+    </div>
+
+    <span>Expense Tracker</span>
+
+</div>
+
+
+<!-- =====================================================
+     PROFILE PAGE
+===================================================== -->
+
+<div class="profile-page">
+
+    <div class="profile-container">
+
+
+        <!-- =============================================
+             PAGE HEADER
+        ============================================== -->
+
+        <div class="profile-header">
+
+            <div class="page-title">
+
+                <div class="title-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <div>
+
+                    <h1>My Profile</h1>
+
+                    <p>
+                        View your account and manage your security settings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="/dashboard"
+               class="back-dashboard">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+        <!-- =============================================
+             MAIN PROFILE GRID
+        ============================================== -->
+
+        <div class="profile-grid">
+
+
+            <!-- =========================================
+                 LEFT PROFILE CARD
+            ========================================== -->
+
+            <div class="profile-card">
+
+
+                <!-- Avatar -->
+
+                <div class="avatar-wrapper">
+
+                    <div class="avatar">
+
+                        <i class="fas fa-user"></i>
+
+                    </div>
+
+                    <span class="online-dot"></span>
+
+                </div>
+
+
+                <!-- User -->
+
+                <h2 class="username">
+                    {{ username }}
+                </h2>
+
+                <p class="user-role">
+                    Expense Tracker User
+                </p>
+
+
+                <div class="account-badge">
+
+                    <i class="fas fa-shield-halved"></i>
+
+                    Secure Account
+
+                </div>
+
+
+                <!-- Divider -->
+
+                <div class="divider"></div>
+
+
+                <!-- Account Info -->
+
+                <div class="account-info">
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Username</span>
+
+                            <strong>
+                                {{ username }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Account Type</span>
+
+                            <strong>
+                                Personal Account
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            <i class="fas fa-circle-check"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Status</span>
+
+                            <strong>
+                                Active
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================================
+                 RIGHT SIDE
+            ========================================== -->
+
+            <div class="profile-content">
+
+
+                <!-- =====================================
+                     FINANCIAL OVERVIEW
+                ====================================== -->
+
+                <div class="financial-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <h2>
+                                Financial Overview
+                            </h2>
+
+                            <p>
+                                Your current account summary.
+                            </p>
+
+                        </div>
+
+                        <i class="fas fa-chart-line"></i>
+
+                    </div>
+
+
+                    <div class="stats">
+
+
+                        <!-- Income -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon income-icon">
+
+                                <i class="fas fa-arrow-trend-up"></i>
+
+                            </div>
+
+                            <div>
+
+                                <span>Total Income</span>
+
+                                <h3>
+                                    ₹{{ "%.2f"|format(income) }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Expense -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon expense-icon">
+
+                                <i class="fas fa-arrow-trend-down"></i>
+
+                            </div>
+
+                            <div>
+
+                                <span>Total Expense</span>
+
+                                <h3>
+                                    ₹{{ "%.2f"|format(expense) }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Balance -->
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon balance-icon">
+
+                                <i class="fas fa-wallet"></i>
+
+                            </div>
+
+                            <div>
+
+                                <span>Current Balance</span>
+
+                                <h3>
+                                    ₹{{ "%.2f"|format(balance) }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =====================================
+                     CHANGE PASSWORD
+                ====================================== -->
+
+                <div class="password-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <h2>
+                                Change Password
+                            </h2>
+
+                            <p>
+                                Update your password to keep your account secure.
+                            </p>
+
+                        </div>
+
+                        <i class="fas fa-lock"></i>
+
+                    </div>
+
+
+                    <form method="POST"
+                          action="/settings">
+
+
+                        <!-- Current Password -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fas fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    name="old_password"
+                                    placeholder="Enter current password"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- New Password -->
+
+                        <div class="form-group">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fas fa-key"></i>
+
+                                <input
+                                    type="password"
+                                    name="new_password"
+                                    placeholder="Enter new password"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Confirm Password -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Confirm Password
+                            </label>
+
+                            <div class="input-box">
+
+                                <i class="fas fa-check"></i>
+
+                                <input
+                                    type="password"
+                                    name="confirm_password"
+                                    placeholder="Confirm new password"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Update Button -->
+
+                        <button type="submit"
+                                class="update-btn">
+
+                            <i class="fas fa-shield-halved"></i>
+
+                            Update Password
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =============================================
+             BOTTOM INFO
+        ============================================== -->
+
+        <div class="profile-footer">
+
+            <div>
+
+                <i class="fas fa-lock"></i>
+
+                Your account information is securely protected.
+
+            </div>
+
+            <div>
+
+                <i class="fas fa-circle-info"></i>
+
+                Use a strong password to protect your financial data.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <p class="footer-text">
+
+        Simple • Secure • Smart expense management
+
+    </p>
+
+
+</div>
+
+
+</body>
+
+</html>

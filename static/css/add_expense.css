@@ -1,0 +1,920 @@
+/* =========================================================
+   ADD EXPENSE - GREEN GLASSMORPHISM UI
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fbfff8 0%,
+            #f6fcef 45%,
+            #fbfff9 100%
+        );
+
+    color:#1d251c;
+
+    overflow-x:hidden;
+
+    position:relative;
+}
+
+
+/* =========================================================
+   SOFT BACKGROUND GLOW
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    width:600px;
+    height:600px;
+
+    top:-250px;
+    right:-180px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(185,255,80,0.18),
+            rgba(140,235,100,0.07),
+            transparent 70%
+        );
+
+    filter:blur(30px);
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+
+/* =========================================================
+   BACKGROUND TEXTURES
+========================================================= */
+
+.expense-texture{
+    position:fixed;
+
+    width:70vw;
+    height:60vh;
+
+    pointer-events:none;
+
+    opacity:0.44;
+
+    overflow:hidden;
+
+    z-index:1;
+}
+
+
+/* TOP LEFT */
+
+.texture-top-left{
+    top:-16%;
+    left:-18%;
+
+    transform:rotate(-6deg);
+}
+
+
+/* BOTTOM RIGHT */
+
+.texture-bottom-right{
+    right:-18%;
+    bottom:-18%;
+
+    transform:rotate(174deg);
+}
+
+
+/* =========================================================
+   TEXTURE WAVES
+========================================================= */
+
+.expense-texture span{
+    position:absolute;
+
+    width:115%;
+    height:150px;
+
+    left:-5%;
+
+    border-radius:
+        48% 52% 60% 40%
+        /
+        55% 45% 55% 45%;
+
+    filter:blur(2px);
+
+    transform-origin:center;
+}
+
+
+/* Wave 1 */
+
+.expense-texture span:nth-child(1){
+    top:0;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(205,255,70,.85),
+            rgba(165,245,90,.65),
+            rgba(100,225,135,.28)
+        );
+
+    transform:
+        rotate(8deg)
+        skewX(-12deg);
+}
+
+
+/* Wave 2 */
+
+.expense-texture span:nth-child(2){
+    top:95px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(180,250,80,.70),
+            rgba(105,235,120,.58),
+            rgba(65,215,155,.24)
+        );
+
+    transform:
+        rotate(-7deg)
+        skewX(16deg);
+}
+
+
+/* Wave 3 */
+
+.expense-texture span:nth-child(3){
+    top:195px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(130,245,115,.54),
+            rgba(65,220,160,.46),
+            rgba(75,205,185,.18)
+        );
+
+    transform:
+        rotate(9deg)
+        skewX(-18deg);
+}
+
+
+/* Wave 4 */
+
+.expense-texture span:nth-child(4){
+    top:295px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(220,255,120,.44),
+            rgba(130,235,120,.34),
+            rgba(80,215,165,.12)
+        );
+
+    transform:
+        rotate(-8deg)
+        skewX(14deg);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+    position:fixed;
+
+    top:26px;
+    left:34px;
+
+    z-index:10;
+
+    display:flex;
+    align-items:center;
+
+    gap:11px;
+
+    color:#273124;
+
+    font-size:17px;
+    font-weight:600;
+}
+
+
+.brand-icon{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    color:#345000;
+
+    background:
+        rgba(185,245,75,0.38);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    border:
+        1px solid rgba(255,255,255,0.85);
+
+    box-shadow:
+        0 8px 22px rgba(80,130,50,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.expense-page{
+    position:relative;
+
+    z-index:3;
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:
+        90px
+        25px
+        45px;
+}
+
+
+/* =========================================================
+   MAIN GLASS CARD
+========================================================= */
+
+.expense-box{
+    position:relative;
+
+    width:100%;
+    max-width:560px;
+
+    padding:38px;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    /*
+       Transparent glass.
+       Background texture remains visible underneath.
+    */
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.22),
+            rgba(255,255,255,0.07)
+        );
+
+    backdrop-filter:
+        blur(30px)
+        saturate(185%);
+
+    -webkit-backdrop-filter:
+        blur(30px)
+        saturate(185%);
+
+    border:
+        1px solid rgba(255,255,255,0.82);
+
+    box-shadow:
+        0 30px 70px rgba(70,120,65,0.13),
+        0 10px 28px rgba(70,120,65,0.07),
+        inset 0 1px 0 rgba(255,255,255,0.96),
+        inset 1px 0 0 rgba(255,255,255,0.48),
+        inset 0 -1px 0 rgba(255,255,255,0.20);
+
+    z-index:4;
+}
+
+
+/* =========================================================
+   GLASS REFLECTION
+========================================================= */
+
+.expense-box::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.34) 0%,
+            rgba(255,255,255,0.08) 25%,
+            transparent 48%,
+            rgba(255,255,255,0.03) 72%,
+            rgba(255,255,255,0.14) 100%
+        );
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+
+/* Keep everything above reflection */
+
+.expense-box > *{
+    position:relative;
+    z-index:2;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.expense-header{
+    text-align:center;
+
+    margin-bottom:28px;
+}
+
+
+.expense-icon{
+    width:58px;
+    height:58px;
+
+    margin:
+        0 auto
+        15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    font-size:23px;
+
+    color:#345000;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(190,255,70,0.65),
+            rgba(145,235,70,0.35)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.85);
+
+    box-shadow:
+        0 12px 28px rgba(120,190,40,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+
+.expense-header h1{
+    color:#1d241b;
+
+    font-size:27px;
+
+    font-weight:650;
+
+    margin-bottom:7px;
+}
+
+
+.expense-header p{
+    color:#71806c;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group{
+    margin-bottom:17px;
+}
+
+
+.form-group label{
+    display:block;
+
+    margin:
+        0
+        0
+        7px
+        4px;
+
+    color:#4c5849;
+
+    font-size:13px;
+
+    font-weight:500;
+}
+
+
+/* =========================================================
+   GLASS INPUT BOX
+========================================================= */
+
+.input-box{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+        0
+        14px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,0.22);
+
+    backdrop-filter:
+        blur(18px)
+        saturate(160%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(160%);
+
+    border:
+        1px solid rgba(255,255,255,0.76);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.90),
+        0 6px 18px rgba(70,110,70,0.04);
+
+    transition:
+        .25s ease;
+}
+
+
+/* Input Icon */
+
+.input-box > i{
+    color:#7a9270;
+
+    font-size:14px;
+
+    width:18px;
+
+    text-align:center;
+
+    flex-shrink:0;
+}
+
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA
+========================================================= */
+
+.input-box input,
+.input-box select,
+.input-box textarea{
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    color:#20271e;
+
+    font-size:13px;
+
+    font-family:'Poppins',sans-serif;
+}
+
+
+.input-box input,
+.input-box select{
+    min-height:48px;
+}
+
+
+.input-box textarea{
+    min-height:95px;
+
+    padding:
+        14px
+        0;
+
+    resize:vertical;
+}
+
+
+/* Placeholder */
+
+.input-box input::placeholder,
+.input-box textarea::placeholder{
+    color:#929d8e;
+}
+
+
+/* Select */
+
+.input-box select{
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+========================================================= */
+
+.input-box:focus-within{
+    background:
+        rgba(255,255,255,0.32);
+
+    border-color:
+        rgba(150,225,50,0.62);
+
+    box-shadow:
+        0 0 0 4px rgba(160,235,50,0.09),
+        inset 0 1px 0 rgba(255,255,255,0.95),
+        0 8px 22px rgba(80,130,60,0.06);
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.textarea-box{
+    align-items:flex-start;
+}
+
+
+.textarea-box > i{
+    margin-top:16px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.form-actions{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+
+/* =========================================================
+   SAVE EXPENSE BUTTON
+========================================================= */
+
+.save-btn{
+    width:100%;
+
+    min-height:50px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    color:#294000;
+
+    font-size:14px;
+
+    font-weight:650;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(185,255,35,0.94),
+            rgba(135,230,30,0.86)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.76);
+
+    box-shadow:
+        0 14px 30px rgba(120,190,30,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.80);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.save-btn:hover{
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 18px 38px rgba(120,190,30,0.27),
+        inset 0 1px 0 rgba(255,255,255,0.90);
+}
+
+
+.save-btn:active{
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn{
+    width:100%;
+
+    min-height:48px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    text-decoration:none;
+
+    border-radius:15px;
+
+    color:#53604f;
+
+    font-size:13px;
+
+    font-weight:550;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    border:
+        1px solid rgba(255,255,255,0.76);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.85),
+        0 7px 20px rgba(70,110,70,0.05);
+
+    transition:
+        .25s ease;
+}
+
+
+.back-btn:hover{
+    background:
+        rgba(255,255,255,0.32);
+
+    transform:
+        translateY(-2px);
+
+    color:#33402f;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-text{
+    margin-top:20px;
+
+    color:#84917f;
+
+    font-size:11px;
+
+    letter-spacing:.3px;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   DATE INPUT
+========================================================= */
+
+input[type="date"]{
+    color:#596454;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px){
+
+    .expense-page{
+        padding:
+            90px
+            18px
+            35px;
+    }
+
+    .expense-box{
+        max-width:100%;
+
+        padding:30px 24px;
+
+        border-radius:24px;
+    }
+
+    .brand{
+        top:22px;
+        left:20px;
+    }
+
+    .expense-texture{
+        width:95vw;
+        height:55vh;
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .expense-box{
+        padding:
+            27px
+            19px;
+    }
+
+    .expense-header h1{
+        font-size:23px;
+    }
+
+    .expense-header p{
+        font-size:12px;
+    }
+
+    .brand span{
+        font-size:14px;
+    }
+
+}
+/* =========================================================
+   STRONG TEXT READABILITY
+========================================================= */
+
+/* Default text */
+body{
+    font-weight:600;
+    color:#172015;
+}
+
+
+/* Expense Tracker Brand */
+.brand{
+    font-weight:800;
+    color:#182316;
+}
+
+
+/* Main Heading - Add Expense */
+.expense-header h1{
+    font-weight:800;
+    color:#121a10;
+}
+
+
+/* Subtitle below heading */
+.expense-header p{
+    font-weight:600;
+    color:#465342;
+}
+
+
+/* Form Labels */
+.form-group label{
+    font-weight:700;
+    color:#263222;
+}
+
+
+/* Input / Select / Textarea entered text */
+.input-box input,
+.input-box select,
+.input-box textarea{
+    font-weight:600;
+    color:#172015;
+}
+
+
+/* Placeholder text */
+.input-box input::placeholder,
+.input-box textarea::placeholder{
+    font-weight:600;
+    color:#687564;
+    opacity:1;
+}
+
+
+/* Input Icons */
+.input-box > i{
+    color:#536a49;
+    font-weight:700;
+}
+
+
+/* Save Expense Button */
+.save-btn{
+    font-weight:800;
+    color:#1d3100;
+}
+
+
+/* Back to Dashboard Button */
+.back-btn{
+    font-weight:700;
+    color:#354331;
+}
+
+
+/* Footer */
+.footer-text{
+    font-weight:600;
+    color:#596655;
+}
+
+
+/* Dropdown options */
+.input-box select option{
+    font-weight:600;
+    color:#172015;
+    background:#ffffff;
+}

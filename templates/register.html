@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - Expense Tracker</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+
+    <!-- ================= BACKGROUND WAVES ================= -->
+
+    <div class="corner-waves wave-top-left">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="corner-waves wave-bottom-right">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- ================= BRAND ================= -->
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="fas fa-wallet"></i>
+        </div>
+
+        <span>Expense Tracker</span>
+
+    </div>
+
+
+    <!-- ================= REGISTER CARD ================= -->
+
+    <div class="login-card">
+
+
+        <!-- Header -->
+
+        <div class="login-header">
+
+            <div class="login-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+
+            <h1>Create account</h1>
+
+            <p>
+                Start managing your money smarter.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FLASH MESSAGES ================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- ================= REGISTER FORM ================= -->
+
+        <form action="/register_user" method="POST">
+
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label>Username</label>
+
+                <div class="input-box">
+
+                    <i class="fas fa-user"></i>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Choose a username"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="fas fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Create Account Button -->
+
+            <button type="submit" class="login-btn">
+
+                Create Account
+
+                <i class="fas fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- ================= LOGIN LINK ================= -->
+
+        <div class="register">
+
+            <p>
+
+                Already have an account?
+
+                <a href="/">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+
+    </div>
+    <!-- END LOGIN CARD -->
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <p class="footer-text">
+        Simple • Secure • Smart expense management
+    </p>
+
+
+</div>
+<!-- END LOGIN PAGE -->
+
+
+</body>
+
+</html>

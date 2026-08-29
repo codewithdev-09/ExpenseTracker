@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Financial Reports - Expense Tracker</title>
+
+
+    <!-- Reports CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/reports.css') }}">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND TEXTURE
+===================================================== -->
+
+<div class="report-texture texture-top-left">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+<div class="report-texture texture-bottom-right">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+
+<!-- =====================================================
+     BRAND
+===================================================== -->
+
+<div class="brand">
+
+    <div class="brand-icon">
+
+        <i class="fas fa-wallet"></i>
+
+    </div>
+
+    <span>Expense Tracker</span>
+
+</div>
+
+
+
+<!-- =====================================================
+     REPORT PAGE
+===================================================== -->
+
+<div class="reports-page">
+
+
+    <div class="reports-container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="reports-header">
+
+
+            <div class="page-title">
+
+
+                <div class="title-icon">
+
+                    <i class="fas fa-chart-pie"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1>Financial Reports</h1>
+
+                    <p>
+                        Analyze your income, expenses and financial progress.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <a href="/dashboard"
+               class="back-btn">
+
+                <i class="fas fa-arrow-left"></i>
+
+                <span>Back to Dashboard</span>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             SUMMARY CARDS
+        ================================================== -->
+
+        <div class="report-cards">
+
+
+            <!-- TOTAL INCOME -->
+
+            <div class="report-card">
+
+
+                <div class="card-icon income-icon">
+
+                    <i class="fas fa-arrow-trend-up"></i>
+
+                </div>
+
+
+                <div class="card-info">
+
+                    <p>Total Income</p>
+
+                    <h2>
+                        ₹{{ "%.2f"|format(income) }}
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOTAL EXPENSE -->
+
+            <div class="report-card">
+
+
+                <div class="card-icon expense-icon">
+
+                    <i class="fas fa-arrow-trend-down"></i>
+
+                </div>
+
+
+                <div class="card-info">
+
+                    <p>Total Expense</p>
+
+                    <h2>
+                        ₹{{ "%.2f"|format(expense) }}
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BALANCE -->
+
+            <div class="report-card">
+
+
+                <div class="card-icon balance-icon">
+
+                    <i class="fas fa-wallet"></i>
+
+                </div>
+
+
+                <div class="card-info">
+
+                    <p>Current Balance</p>
+
+                    <h2>
+                        ₹{{ "%.2f"|format(balance) }}
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SAVINGS -->
+
+            <div class="report-card">
+
+
+                <div class="card-icon savings-icon">
+
+                    <i class="fas fa-piggy-bank"></i>
+
+                </div>
+
+
+                <div class="card-info">
+
+                    <p>Total Savings</p>
+
+                    <h2>
+                        ₹{{ "%.2f"|format(savings) }}
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             REPORT FILTER
+        ================================================== -->
+
+        <div class="filter-section">
+
+
+            <div class="filter-title">
+
+
+                <div class="filter-icon">
+
+                    <i class="fas fa-calendar-days"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>Report Filter</h3>
+
+                    <p>
+                        Select a period to analyze your financial data.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <form method="GET"
+                  action="/reports"
+                  class="filter-form">
+
+
+                <div class="select-box">
+
+                    <i class="fas fa-filter"></i>
+
+
+                    <select name="filter">
+
+                        <option value="all">
+                            All Time
+                        </option>
+
+                        <option value="today">
+                            Today
+                        </option>
+
+                        <option value="week">
+                            This Week
+                        </option>
+
+                        <option value="month">
+                            This Month
+                        </option>
+
+                        <option value="year">
+                            This Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <button type="submit"
+                        class="apply-btn">
+
+                    <i class="fas fa-filter"></i>
+
+                    Apply Filter
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             CHART GRID
+        ================================================== -->
+
+        <div class="charts-grid">
+
+
+            <!-- =================================================
+                 EXPENSE BY CATEGORY
+            ================================================== -->
+
+            <div class="chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <div>
+
+                        <h3>
+                            Expense by Category
+                        </h3>
+
+                        <p>
+                            See where most of your money is being spent.
+                        </p>
+
+                    </div>
+
+
+                    <div class="small-chart-icon">
+
+                        <i class="fas fa-chart-pie"></i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas id="expensePieChart"></canvas>
+
+                    <div class="no-chart-data"
+                         id="noExpenseCategory">
+
+                        <i class="fas fa-chart-pie"></i>
+
+                        <p>
+                            No category expense data available.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INCOME VS EXPENSE
+            ================================================== -->
+
+            <div class="chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <div>
+
+                        <h3>
+                            Income vs Expense
+                        </h3>
+
+                        <p>
+                            Compare your total earnings and spending.
+                        </p>
+
+                    </div>
+
+
+                    <div class="small-chart-icon">
+
+                        <i class="fas fa-chart-column"></i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas id="incomeExpenseChart"></canvas>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MONTHLY EXPENSE TREND
+            ================================================== -->
+
+            <div class="chart-card monthly-chart-card">
+
+
+                <div class="chart-header">
+
+
+                    <div>
+
+                        <h3>
+                            Monthly Expense Trend
+                        </h3>
+
+                        <p>
+                            Track how your expenses change month by month.
+                        </p>
+
+                    </div>
+
+
+                    <div class="small-chart-icon">
+
+                        <i class="fas fa-chart-line"></i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="chart-wrapper monthly-wrapper">
+
+                    <canvas id="monthlyExpenseChart"></canvas>
+
+                    <div class="no-chart-data"
+                         id="noMonthlyData">
+
+                        <i class="fas fa-chart-line"></i>
+
+                        <p>
+                            No monthly expense data available.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOTTOM INFO
+        ================================================== -->
+
+        <div class="report-footer">
+
+
+            <div>
+
+                <i class="fas fa-shield-halved"></i>
+
+                Your financial information is securely stored.
+
+            </div>
+
+
+            <div>
+
+                <i class="fas fa-circle-info"></i>
+
+                Use report filters to analyze different periods.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <p class="footer-text">
+
+        Simple • Secure • Smart expense management
+
+    </p>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FLASK DATA
+
+     Putting Jinja inside data-* attributes avoids the
+     JavaScript/Jinja VS Code errors you had previously.
+===================================================== -->
+
+<div id="reportData"
+
+     data-labels='{{ labels | tojson }}'
+
+     data-values='{{ values | tojson }}'
+
+     data-income='{{ income | tojson }}'
+
+     data-expense='{{ expense | tojson }}'
+
+     data-month-labels='{{ month_labels | tojson }}'
+
+     data-month-values='{{ month_values | tojson }}'>
+
+</div>
+
+
+
+<!-- =====================================================
+     REPORT JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+
+
+</body>
+
+</html>

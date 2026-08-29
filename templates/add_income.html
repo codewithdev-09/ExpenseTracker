@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Income History - Expense Tracker</title>
+
+    <!-- Income History CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/income_history.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND GREEN TEXTURE
+===================================================== -->
+
+<div class="history-texture texture-top-left">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="history-texture texture-bottom-right">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+<!-- =====================================================
+     BRAND
+===================================================== -->
+
+<div class="brand">
+
+    <div class="brand-icon">
+        <i class="fas fa-wallet"></i>
+    </div>
+
+    <span>Expense Tracker</span>
+
+</div>
+
+
+<!-- =====================================================
+     INCOME HISTORY PAGE
+===================================================== -->
+
+<div class="history-page">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="top-bar">
+
+            <div class="page-title">
+
+                <div class="title-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+
+                <div>
+
+                    <h1>Income History</h1>
+
+                    <p>
+                        View, search and manage your previous income records.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="/dashboard"
+               class="back-btn">
+
+                <i class="fas fa-arrow-left"></i>
+
+                <span>Back to Dashboard</span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH + FILTER TOOLBAR
+        ================================================== -->
+
+        <div class="toolbar">
+
+
+            <!-- Search -->
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search income by title...">
+
+            </div>
+
+
+            <!-- Category Filter -->
+
+            <div class="filter-box">
+
+                <i class="fas fa-filter"></i>
+
+                <select id="categoryFilter">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    <option value="Salary">
+                        Salary
+                    </option>
+
+                    <option value="Business">
+                        Business
+                    </option>
+
+                    <option value="Freelancing">
+                        Freelancing
+                    </option>
+
+                    <option value="Investment">
+                        Investment
+                    </option>
+
+                    <option value="Gift">
+                        Gift
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Add Income Button -->
+
+            <a href="/add_income"
+               class="add-income-btn">
+
+                <i class="fas fa-plus"></i>
+
+                <span>Add Income</span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             INCOME TABLE
+        ================================================== -->
+
+        <div class="table-container">
+
+            <table id="incomeTable">
+
+
+                <!-- TABLE HEADER -->
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            <i class="fas fa-hashtag"></i>
+                            ID
+                        </th>
+
+                        <th>
+                            <i class="fas fa-tag"></i>
+                            Title
+                        </th>
+
+                        <th>
+                            <i class="fas fa-layer-group"></i>
+                            Category
+                        </th>
+
+                        <th>
+                            <i class="fas fa-indian-rupee-sign"></i>
+                            Amount
+                        </th>
+
+                        <th>
+                            <i class="fas fa-calendar-days"></i>
+                            Date
+                        </th>
+
+                        <th>
+                            <i class="fas fa-gear"></i>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <!-- TABLE BODY -->
+
+                <tbody>
+
+
+                    {% if incomes %}
+
+
+                        {% for income in incomes %}
+
+                        <tr>
+
+
+                            <!-- ID -->
+
+                            <td>
+                                {{ income[0] }}
+                            </td>
+
+
+                            <!-- TITLE -->
+
+                            <td class="income-title">
+                                {{ income[1] }}
+                            </td>
+
+
+                            <!-- CATEGORY -->
+
+                            <td>
+
+                                <span class="category-badge">
+                                    {{ income[2] }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- AMOUNT -->
+
+                            <td class="income-amount">
+
+                                ₹{{ "%.2f"|format(income[3]) }}
+
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td>
+                                {{ income[4] }}
+                            </td>
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <div class="action-buttons">
+
+
+                                    <!-- EDIT -->
+
+                                    <a href="/edit_income/{{ income[0] }}"
+                                       class="edit-btn"
+                                       title="Edit Income">
+
+                                        <i class="fas fa-pen-to-square"></i>
+
+                                    </a>
+
+
+                                    <!-- DELETE -->
+
+                                    <a href="/delete_income/{{ income[0] }}"
+                                       class="delete-btn"
+                                       title="Delete Income"
+
+                                       onclick="return confirm(
+                                           'Are you sure you want to delete this income?'
+                                       )">
+
+                                        <i class="fas fa-trash"></i>
+
+                                    </a>
+
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <!-- =================================================
+                             EMPTY STATE
+                        ================================================== -->
+
+                        <tr>
+
+                            <td colspan="6">
+
+                                <div class="empty-state">
+
+
+                                    <div class="empty-icon">
+
+                                        <i class="fas fa-money-bill-wave"></i>
+
+                                    </div>
+
+
+                                    <h3>
+                                        No income records found
+                                    </h3>
+
+
+                                    <p>
+                                        Start tracking your earnings by adding
+                                        your first income record.
+                                    </p>
+
+
+                                    <a href="/add_income"
+                                       class="empty-add-btn">
+
+                                        <i class="fas fa-plus"></i>
+
+                                        Add Your First Income
+
+                                    </a>
+
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endif %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTTOM INFORMATION
+        ================================================== -->
+
+        <div class="history-footer">
+
+            <div>
+
+                <i class="fas fa-shield-halved"></i>
+
+                Your income records are securely stored.
+
+            </div>
+
+
+            <div>
+
+                <i class="fas fa-circle-info"></i>
+
+                Use search or category filters to find income quickly.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <p class="footer-text">
+
+        Simple • Secure • Smart expense management
+
+    </p>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='js/income_history.js') }}"></script>
+
+
+</body>
+
+</html>

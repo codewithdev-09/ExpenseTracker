@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Income</title>
+
+    <!-- Edit Income CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_expense.css') }}">
+
+</head>
+
+<body>
+
+<div class="expense-container">
+
+    <h1>💰 Edit Income</h1>
+
+    <form method="POST">
+
+        <!-- Title -->
+
+        <input
+        type="text"
+        name="title"
+        value="{{ income[1] }}"
+        placeholder="Income Title"
+        required>
+
+        <!-- Category -->
+
+        <select name="category" required>
+
+            <option value="{{ income[2] }}">
+                {{ income[2] }}
+            </option>
+
+            <option value="Salary">Salary</option>
+
+            <option value="Business">Business</option>
+
+            <option value="Freelancing">Freelancing</option>
+
+            <option value="Investment">Investment</option>
+
+            <option value="Gift">Gift</option>
+
+            <option value="Other">Other</option>
+
+        </select>
+
+        <!-- Amount -->
+
+        <input
+        type="number"
+        name="amount"
+        value="{{ income[3] }}"
+        placeholder="Amount"
+        required>
+
+        <!-- Date -->
+
+        <input
+        type="date"
+        name="date"
+        value="{{ income[4] }}"
+        required>
+
+        <!-- Description -->
+
+        <textarea
+        name="description"
+        placeholder="Description">{{ income[5] }}</textarea>
+
+        <!-- Save Button -->
+
+        <button type="submit">
+
+            💾 Save Changes
+
+        </button>
+
+    </form>
+
+    <a href="{{ url_for('income_history') }}">
+
+        ⬅ Back to Income History
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+/* ==============================
+   EDIT EXPENSE BLACK ORANGE THEME
+   PROPER ALIGNMENT
+   ============================== */
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    background: #050505;
+
+    color: white;
+
+    font-family: "Poppins", Arial, sans-serif;
+
+}
+
+
+/* Main Card */
+
+.expense-container {
+
+    width: 450px;
+
+    margin: 60px auto;
+
+    padding: 35px;
+
+    background: #111;
+
+    border-radius: 25px;
+
+    border: 1px solid rgba(255,106,0,0.3);
+
+    box-shadow:
+    0 0 25px rgba(255,106,0,0.15);
+
+}
+
+
+
+/* Heading */
+
+.expense-container h1 {
+
+    text-align:center;
+
+    color:#ff6a00;
+
+    margin-bottom:30px;
+
+}
+
+
+
+/* Form */
+
+.expense-container form {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+/* All Input Boxes */
+
+.expense-container input,
+.expense-container select,
+.expense-container textarea {
+
+
+    width:100%;
+
+    height:50px;
+
+    padding:0 15px;
+
+
+    background:#181818;
+
+    color:white;
+
+
+    border:1px solid #333;
+
+    border-radius:12px;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+}
+
+
+
+/* Textarea */
+
+.expense-container textarea {
+
+
+    height:120px;
+
+    padding:15px;
+
+    resize:none;
+
+}
+
+
+
+/* Focus Effect */
+
+.expense-container input:focus,
+.expense-container select:focus,
+.expense-container textarea:focus {
+
+
+    border-color:#ff6a00;
+
+
+    box-shadow:
+
+    0 0 10px rgba(255,106,0,0.4);
+
+}
+
+
+
+/* Save Button */
+
+
+.expense-container button {
+
+
+    width:100%;
+
+    height:52px;
+
+
+    margin-top:10px;
+
+
+    background:linear-gradient(
+        135deg,
+        #ff6a00,
+        #ff9500
+    );
+
+
+    color:white;
+
+
+    border:none;
+
+    border-radius:14px;
+
+
+    font-size:16px;
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+/* Button Hover */
+
+.expense-container button:hover {
+
+
+    box-shadow:
+
+    0 0 20px rgba(255,106,0,0.6);
+
+
+}
+
+
+
+/* Back Link */
+
+.expense-container a {
+
+
+    text-align:center;
+
+    margin-top:20px;
+
+
+    display:block;
+
+
+    color:#ff6a00;
+
+    text-decoration:none;
+
+
+}

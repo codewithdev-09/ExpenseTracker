@@ -1,0 +1,1033 @@
+/* =========================================
+   EXPENSE TRACKER - LOGIN PAGE
+   Minimal + Light Green + Glassmorphism
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', Arial, sans-serif;
+}
+
+:root{
+    --primary:#a8f000;
+    --primary-dark:#8fd000;
+
+    --text:#121212;
+    --text-soft:#6b7280;
+
+    --glass:rgba(255,255,255,0.68);
+    --border:rgba(255,255,255,0.85);
+}
+
+/* ================= BODY ================= */
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:#fbfdf9;
+    color:#111;
+    overflow-x:hidden;
+    position:relative;
+}
+/* ================= AUTH BACKGROUND ================= */
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at 18% 20%,
+            rgba(190,255,95,0.13),
+            transparent 24%),
+
+        radial-gradient(circle at 82% 78%,
+            rgba(75,220,130,0.12),
+            transparent 25%),
+
+        #fbfdf9;
+
+    color:#111;
+
+    overflow-x:hidden;
+    position:relative;
+}
+
+
+/* ================= TOP LEFT WAVE ================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+
+    width:620px;
+    height:300px;
+
+    /*
+       Bring the wave close to
+       top-left corner of login card
+    */
+    top:7%;
+    left:5%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(205,255,75,0.55),
+            rgba(155,245,95,0.40) 35%,
+            rgba(70,220,135,0.28) 65%,
+            rgba(50,200,155,0.10)
+        );
+
+    border-radius:
+        60% 40% 65% 35%
+        /
+        45% 60% 40% 55%;
+
+    transform:rotate(-12deg);
+
+    filter:blur(1px);
+
+    box-shadow:
+        0 30px 80px rgba(130,230,80,0.16),
+        inset -40px -30px 80px rgba(255,255,255,0.35);
+
+    opacity:.8;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+
+/* ================= BODY ================= */
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #fbfff8 55%,
+            #f5faef 100%
+        );
+
+    color:#111;
+    overflow:hidden;
+}
+/* ================= PAGE ================= */
+
+.login-page{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:30px 20px;
+
+    position:relative;
+z-index:0;
+}
+
+/* ================= BRAND ================= */
+
+.brand{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:25px;
+
+    font-size:18px;
+    font-weight:700;
+
+    color:#111;
+}
+
+.brand-icon{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:#111;
+
+    box-shadow:0 6px 18px rgba(168,240,0,0.25);
+}
+
+/* ================= MAX GLASS CARD ================= */
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    padding:40px;
+
+    position:relative;
+    z-index:2;
+    overflow:hidden;
+
+    /* VERY transparent glass */
+    background:rgba(255,255,255,0.12);
+
+    /* Strong frosting */
+    backdrop-filter:blur(22px) saturate(180%);
+    -webkit-backdrop-filter:blur(22px) saturate(180%);
+
+    /* Bright glass edge */
+    border:1px solid rgba(255,255,255,0.75);
+
+    border-radius:24px;
+
+    box-shadow:
+        0 25px 60px rgba(65,120,70,0.14),
+        0 8px 25px rgba(65,120,70,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.95),
+        inset 0 -1px 0 rgba(255,255,255,0.25);
+}
+
+
+/* Top glass reflection */
+
+.login-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:42%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.32),
+            rgba(255,255,255,0.07),
+            transparent
+        );
+
+    border-radius:24px 24px 50% 50%;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+.login-card::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.30) 0%,
+            rgba(255,255,255,0.06) 35%,
+            rgba(255,255,255,0.02) 65%,
+            rgba(255,255,255,0.15) 100%
+        );
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+
+/* Keep form above reflection */
+
+.login-card > *{
+    position:relative;
+    z-index:2;
+}
+/* ================= HEADER ================= */
+
+.login-header{
+    text-align:center;
+
+    margin-bottom:32px;
+}
+
+.login-icon{
+    width:52px;
+    height:52px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:rgba(168,240,0,0.18);
+
+    color:#70a800;
+
+    font-size:20px;
+}
+
+.login-header h1{
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:9px;
+
+    color:#111;
+}
+
+.login-header p{
+    color:var(--text-soft);
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+/* ================= FORM ================= */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+    font-weight:600;
+
+    color:#252525;
+}
+
+/* INPUT */
+
+.input-box{
+    width:100%;
+
+    height:54px;
+
+    display:flex;
+    align-items:center;
+
+    background:rgba(255,255,255,0.25);
+
+    border:1px solid #dfe4dc;
+
+    border-radius:14px;
+
+    padding:0 16px;
+
+    transition:0.25s ease;
+
+    backdrop-filter:blur(18px) saturate(160%);
+-webkit-backdrop-filter:blur(18px) saturate(160%);
+
+border:1px solid rgba(255,255,255,0.75);
+
+box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.90),
+    0 6px 18px rgba(70,110,70,0.04);
+}
+
+.input-box i{
+    color:#8b9288;
+
+    margin-right:12px;
+}
+
+.input-box input{
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
+
+    color:#111;
+}
+
+.input-box input::placeholder{
+    color:#9ca3af;
+}
+
+/* Focus effect */
+
+.input-box:focus-within{
+    border-color:var(--primary-dark);
+
+    background:rgba(255,255,255,0.38);
+
+    box-shadow:0 0 0 4px rgba(168,240,0,0.13);
+}
+
+.input-box:focus-within i{
+    color:#78ad00;
+}
+
+/* ================= LOGIN BUTTON ================= */
+
+.login-btn{
+    width:100%;
+
+    height:54px;
+
+    margin-top:10px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:12px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:#111;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+    box-shadow:0 8px 22px rgba(168,240,0,0.22);
+}
+
+.login-btn:hover{
+    background:var(--primary-dark);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px rgba(168,240,0,0.30);
+}
+
+.login-btn:active{
+    transform:translateY(0);
+}
+
+/* ================= REGISTER ================= */
+
+.register{
+    margin-top:25px;
+
+    padding-top:22px;
+
+    border-top:1px solid rgba(0,0,0,0.07);
+
+    text-align:center;
+}
+
+.register p{
+    color:var(--text-soft);
+
+    font-size:14px;
+}
+
+.register a{
+    color:#659900;
+
+    font-weight:700;
+
+    text-decoration:none;
+}
+
+.register a:hover{
+    text-decoration:underline;
+}
+
+/* ================= FOOTER ================= */
+
+.footer-text{
+    margin-top:22px;
+
+    color:#8a9187;
+
+    font-size:12px;
+
+    text-align:center;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:500px){
+
+    .login-card{
+        padding:30px 22px;
+
+        border-radius:20px;
+    }
+
+    .login-header h1{
+        font-size:26px;
+    }
+
+    .brand{
+        margin-bottom:20px;
+    }
+
+}
+/* ================= FLASH MESSAGES ================= */
+
+.flash-message{
+    width:100%;
+    padding:12px 15px;
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-size:13px;
+    font-weight:500;
+
+    text-align:center;
+}
+
+/* Success */
+
+.flash-message.success{
+    background:rgba(168,240,0,0.15);
+    border:1px solid rgba(120,180,0,0.25);
+    color:#527a00;
+}
+
+/* Error */
+
+.flash-message.danger{
+    background:#fff1f1;
+    border:1px solid #ffcaca;
+    color:#c0392b;
+}
+/* ===== FORCE LOGIN / REGISTER GLASS CARD ===== */
+
+.login-page .login-card{
+    width:100%;
+    max-width:440px;
+
+    padding:42px;
+
+    background:rgba(255, 255, 255, 0.88) !important;
+
+    border:1px solid rgba(110, 160, 70, 0.28) !important;
+
+    border-radius:24px !important;
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 20px 60px rgba(60, 100, 40, 0.15),
+        0 5px 20px rgba(60, 100, 40, 0.08) !important;
+
+    position:relative;
+    z-index:10;
+}
+/* =========================================
+   DIAGONAL ZIGZAG / RIBBON WAVES
+========================================= */
+
+.corner-waves{
+    position:fixed;
+
+    width:70vw;
+    height:55vh;
+
+    pointer-events:none;
+
+    opacity:.45;
+
+    z-index:1;
+}
+
+
+/* Individual wave ribbons */
+
+.corner-waves span{
+    position:absolute;
+
+    width:100%;
+    height:75px;
+
+    border-radius:
+        45% 55% 48% 52%
+        /
+        55% 45% 55% 45%;
+
+    filter:blur(.3px);
+
+    box-shadow:
+        0 12px 35px rgba(80,180,80,.10);
+}
+
+
+/* -------- Different shades -------- */
+
+.corner-waves span:nth-child(1){
+    background:
+        linear-gradient(
+            90deg,
+            #dfff5f,
+            #b9f76b,
+            #82e89a
+        );
+
+    transform:
+        rotate(18deg)
+        skewX(-20deg);
+
+    top:0;
+}
+
+
+.corner-waves span:nth-child(2){
+    background:
+        linear-gradient(
+            90deg,
+            #c8f75d,
+            #8ee88a,
+            #58d6a0
+        );
+
+    transform:
+        rotate(10deg)
+        skewX(22deg);
+
+    top:70px;
+
+    left:25px;
+
+    opacity:.80;
+}
+
+
+.corner-waves span:nth-child(3){
+    background:
+        linear-gradient(
+            90deg,
+            #a8ef62,
+            #6ddd91,
+            #41c99b
+        );
+
+    transform:
+        rotate(20deg)
+        skewX(-25deg);
+
+    top:140px;
+
+    left:65px;
+
+    opacity:.62;
+}
+
+
+.corner-waves span:nth-child(4){
+    background:
+        linear-gradient(
+            90deg,
+            #dffb83,
+            #9be986,
+            #69d8a0
+        );
+
+    transform:
+        rotate(8deg)
+        skewX(20deg);
+
+    top:205px;
+
+    left:105px;
+
+    opacity:.42;
+}
+
+
+/* =========================================
+   TOP LEFT
+========================================= */
+
+.wave-top-left{
+    top:-120px;
+    left:-180px;
+
+    transform:
+        rotate(-8deg)
+        scale(1.15);
+}
+
+/* =========================================
+   BOTTOM RIGHT
+========================================= */
+
+.wave-bottom-right{
+    right:-180px;
+    bottom:-120px;
+
+    transform:
+        rotate(170deg)
+        scale(1.15);
+}
+
+/* =========================================================
+   FINAL GLASSMORPHISM OVERRIDE
+   KEEP THIS AT THE VERY BOTTOM OF style.css
+========================================================= */
+
+.login-page{
+    position:relative !important;
+    z-index:1 !important;
+}
+
+
+/* ---------- WAVES ---------- */
+
+.corner-waves{
+    position:fixed;
+
+    width:75vw !important;
+    height:60vh !important;
+
+    opacity:0.48 !important;
+
+    pointer-events:none;
+
+    z-index:1 !important;
+}
+
+.wave-top-left{
+    top:-90px !important;
+    left:-180px !important;
+
+    transform:
+        rotate(-6deg)
+        scale(1.18) !important;
+}
+.wave-bottom-right{
+    right:-180px !important;
+    bottom:-100px !important;
+
+    transform:
+        rotate(170deg)
+        scale(1.18) !important;
+}
+
+/* =========================================================
+   REAL TRANSPARENT GLASS CARD
+========================================================= */
+
+.login-page .login-card{
+
+    width:100%;
+    max-width:420px;
+
+    padding:40px;
+
+    position:relative !important;
+    z-index:3 !important;
+
+    overflow:hidden;
+
+    /* IMPORTANT - almost transparent */
+    background:rgba(255,255,255,0.10) !important;
+
+    /* Strong frosted glass */
+    backdrop-filter:
+        blur(26px)
+        saturate(180%) !important;
+
+    -webkit-backdrop-filter:
+        blur(26px)
+        saturate(180%) !important;
+
+    /* Glass edge */
+    border:1px solid rgba(255,255,255,0.80) !important;
+
+    border-radius:24px !important;
+
+    /* Real glass depth */
+    box-shadow:
+        0 25px 60px rgba(65,110,70,0.14),
+        0 8px 25px rgba(65,110,70,0.07),
+
+        inset 0 1px 0 rgba(255,255,255,0.95),
+        inset 0 -1px 0 rgba(255,255,255,0.20),
+
+        inset 1px 0 0 rgba(255,255,255,0.45) !important;
+}
+
+
+/* ---------- GLASS LIGHT REFLECTION ---------- */
+
+.login-page .login-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+
+            rgba(255,255,255,.35) 0%,
+
+            rgba(255,255,255,.10) 20%,
+
+            rgba(255,255,255,.02) 45%,
+
+            rgba(255,255,255,.05) 75%,
+
+            rgba(255,255,255,.18) 100%
+        );
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+
+/* Keep form content above reflection */
+
+.login-page .login-card > *{
+    position:relative;
+    z-index:2;
+}
+
+
+/* =========================================================
+   GLASS INPUTS
+========================================================= */
+
+.login-page .input-box{
+
+    background:rgba(255,255,255,0.18) !important;
+
+    backdrop-filter:
+        blur(15px)
+        saturate(160%) !important;
+
+    -webkit-backdrop-filter:
+        blur(15px)
+        saturate(160%) !important;
+
+    border:
+        1px solid rgba(255,255,255,0.72) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.85),
+        0 5px 15px rgba(60,100,60,.04) !important;
+}
+
+
+.login-page .input-box:focus-within{
+
+    background:rgba(255,255,255,0.28) !important;
+
+    border-color:rgba(160,230,50,.60) !important;
+
+    box-shadow:
+        0 0 0 4px rgba(160,230,50,.10),
+        inset 0 1px rgba(255,255,255,.90) !important;
+}
+
+/* =========================================
+   FINAL GLASS LAYERING
+========================================= */
+
+.corner-waves{
+    z-index:1 !important;
+}
+
+.login-page{
+    position:relative;
+    z-index:2;
+}
+
+
+/* =========================================
+   DASHBOARD-STYLE LOGIN GLASS
+========================================= */
+
+.login-page .login-card{
+    position:relative;
+    z-index:3;
+
+    width:100%;
+    max-width:420px;
+    padding:40px;
+
+    border-radius:24px;
+
+    /*
+       LOW opacity is important.
+       Texture must remain visible.
+    */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.18),
+            rgba(255,255,255,0.06)
+        ) !important;
+
+    backdrop-filter:
+        blur(30px)
+        saturate(190%) !important;
+
+    -webkit-backdrop-filter:
+        blur(30px)
+        saturate(190%) !important;
+
+    border:
+        1px solid rgba(255,255,255,0.80) !important;
+
+    box-shadow:
+        0 25px 60px rgba(65,115,65,0.14),
+        0 8px 22px rgba(65,115,65,0.07),
+
+        inset 0 1px 0 rgba(255,255,255,0.95),
+        inset 1px 0 0 rgba(255,255,255,0.55),
+        inset 0 -1px 0 rgba(255,255,255,0.20) !important;
+
+    overflow:hidden;
+}
+.login-page .login-card::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.32) 0%,
+            rgba(255,255,255,0.08) 25%,
+            transparent 50%,
+            rgba(255,255,255,0.08) 100%
+        );
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.login-page .login-card > *{
+    position:relative;
+    z-index:2;
+}
+/* =========================================================
+   STRONG TEXT READABILITY - LOGIN + REGISTER
+========================================================= */
+
+/* Default */
+body{
+    font-weight:600;
+    color:#172015;
+}
+
+/* Expense Tracker Brand */
+.brand{
+    font-weight:800;
+    color:#182316;
+}
+
+.brand span{
+    font-weight:800;
+}
+
+/* Welcome Back / Create Account */
+.login-header h1,
+.login-card h1{
+    font-weight:800;
+    color:#121a10;
+}
+
+/* Subtitle */
+.login-header p{
+    font-weight:600;
+    color:#465342;
+}
+
+/* Username / Password labels */
+.form-group label{
+    font-weight:700;
+    color:#263222;
+}
+
+/* Input entered text */
+.input-box input{
+    font-weight:600;
+    color:#172015;
+}
+
+/* Placeholder */
+.input-box input::placeholder{
+    font-weight:600;
+    color:#687564;
+    opacity:1;
+}
+
+/* Input icons */
+.input-box > i{
+    color:#536a49;
+}
+
+/* Login / Create Account button */
+.login-btn{
+    font-weight:800;
+    color:#1d3100;
+}
+
+/* Don't have account / Already have account */
+.register p{
+    font-weight:600;
+    color:#465342;
+}
+
+/* Create account / Login link */
+.register a{
+    font-weight:800;
+    color:#527800;
+}
+
+/* Footer */
+.footer-text{
+    font-weight:600;
+    color:#596655;
+}
