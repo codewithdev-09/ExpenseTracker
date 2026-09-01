@@ -8,19 +8,23 @@ from flask import (
     flash
 )
 
+import os
 import sqlite3
 from functools import wraps
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from login import register, login
+from database import create_database
 
 app = Flask(__name__)
 
-app.secret_key = "expense_tracker_secret_key_2026"
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "expense_tracker_secret_key_2026"
+)
 
 DATABASE = "expense.db"
-
 
 # ---------------- DATABASE CONNECTION ----------------
 
@@ -918,6 +922,7 @@ def delete_expense(expense_id):
 # ---------------- RUN APPLICATION ----------------
 
 if __name__ == "__main__":
+    create_database()
 
     app.run(
         debug=True
