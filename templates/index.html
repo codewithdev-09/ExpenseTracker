@@ -72,10 +72,31 @@
 
             <h1>Welcome back</h1>
 
+            <!-- ================= LOGIN FLASH MESSAGE ================= -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% for category, message in messages %}
+
+        {% if category == "login_error" %}
+            <div class="alert danger login-error">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if category == "success" %}
+            <div class="alert success login-success">
+                {{ message }}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+
+{% endwith %}
+
             <p>Sign in to manage your money smarter.</p>
 
         </div>
-
 
         <form action="/login_user" method="POST">
 

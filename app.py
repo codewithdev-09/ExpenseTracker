@@ -117,7 +117,6 @@ def login_user():
 
     return redirect(url_for("home"))
 
-
 # ---------------- LOGOUT ----------------
 
 @app.route("/logout")
