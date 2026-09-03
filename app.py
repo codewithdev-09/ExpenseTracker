@@ -18,6 +18,7 @@ from login import register, login
 from database import create_database
 
 app = Flask(__name__)
+create_database()
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
@@ -99,7 +100,6 @@ def register_user():
 def login_user():
 
     username = request.form["username"].strip()
-
     password = request.form["password"]
 
     user = login(username, password)
@@ -107,14 +107,13 @@ def login_user():
     if user:
 
         session["user_id"] = user["id"]
-
         session["username"] = user["username"]
 
         flash("Welcome back!", "success")
 
         return redirect(url_for("dashboard"))
 
-    flash("Invalid Username or Password.", "danger")
+    flash("Invalid Username or Password.", "login_error")
 
     return redirect(url_for("home"))
 
@@ -919,10 +918,13 @@ def delete_expense(expense_id):
     return redirect(url_for("expense_history"))
 
 
+# Create database and required tables when application starts
+create_database()
+
+
 # ---------------- RUN APPLICATION ----------------
 
 if __name__ == "__main__":
-    create_database()
 
     app.run(
         debug=True
